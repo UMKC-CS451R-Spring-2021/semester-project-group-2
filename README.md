@@ -1,7 +1,7 @@
 # semester-project-group-2
 semester-project-group-2 created by GitHub Classroom
 
-##Team members
+Team members
   Coy Kwan, Feng Zheng, Anna Johnson, Cori Mroz, Daylan Quinn
   
 Roles
@@ -13,3 +13,5 @@ Team Rules
   3-4 weekly updates on discord 
   ~3 hours a week time comitiment
   
+##Team Members
+Cori Mroz
