@@ -11,3 +11,6 @@ Team Rules
   3-4 weekly updates on discord 
   ~3 hours a week time comitiment
   
+  
+  ## Members
+  Coy Kwan
