@@ -13,3 +13,5 @@ Team Rules
   
   ## Members
   Feng Zheng
+  Coy Kwan
+
