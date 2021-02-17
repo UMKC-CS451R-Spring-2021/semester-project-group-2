@@ -1,7 +1,9 @@
 # semester-project-group-2
 semester-project-group-2 created by GitHub Classroom
+
 Team members
   Coy Kwan, Feng Zheng, Anna Johnson, Cori Mroz, Daylan Quinn
+  
 Roles
   Project Manager: Coy Kwan
   Front End: Cori 
@@ -12,6 +14,13 @@ Team Rules
   ~3 hours a week time comitiment
   
 ## Members
+
   Feng Zheng
+  
   Coy Kwan
+
   Daylan Quinn
+  
+  Cori Mroz
+  
+  Anna Johnson
