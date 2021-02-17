@@ -1,12 +1,8 @@
 # semester-project-group-2
 semester-project-group-2 created by GitHub Classroom
 
-Team members
-  Coy Kwan 
-  Feng Zheng 
-  Anna Johnson 
-  Cori Mroz
-  Daylan Quinn
+##Team members
+  Coy Kwan, Feng Zheng, Anna Johnson, Cori Mroz, Daylan Quinn
   
 Roles
   Project Manager: Coy Kwan
