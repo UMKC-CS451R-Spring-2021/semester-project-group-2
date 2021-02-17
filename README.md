@@ -12,4 +12,6 @@ Team Rules
   ~3 hours a week time comitiment
   
 ## Members
-Daylan Quinn
+  Feng Zheng
+  Coy Kwan
+  Daylan Quinn
