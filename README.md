@@ -18,8 +18,9 @@ Team Rules
   Feng Zheng
   
   Coy Kwan
+
+  Daylan Quinn
   
   Cori Mroz
   
   Anna Johnson
-
