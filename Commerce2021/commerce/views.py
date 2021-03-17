@@ -4,13 +4,16 @@ import re
 from django.utils.timezone import datetime
 from django.shortcuts import redirect
 from django.views.generic import ListView
-from .models import Customer
+from .models import Transactions, AuthUser
+from django.contrib.auth.decorators import login_required
+from django.contrib import auth
+
 
 
 # Create your views here.
 
-def home(request):
-    return render(request, "commerce/home.html")
+def login(request):
+    return render(request, "registration/login.html")
 
 def about(request):
     return render(request, "commerce/about.html")
@@ -28,6 +31,7 @@ def hello_there(request, name):
         }
     )
 
-def display(request):
-	query_results=Customer.objects.all() # Collect all records from table 
-	return render(request,'commerce/display.html',{'query_results':query_results})
+@login_required
+def transactions(request):
+	query_results=Transactions.objects.all() # Collect all records from table 
+	return render(request,'commerce/transactions.html',{'query_results':query_results})

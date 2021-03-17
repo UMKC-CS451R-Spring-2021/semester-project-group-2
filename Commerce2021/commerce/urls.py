@@ -1,13 +1,17 @@
-from django.urls import path
+from django.urls import include, path
 from commerce import views
+from django.contrib import admin
 
 
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", views.login, name="login"),
     path("commerce/<name>", views.hello_there, name="hello_there"),
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
-    path("display/", views.display, name="display"),
-    #path("log/", views.log_message, name="log"),
+    path("transactions/", views.transactions, name="transactions"),
+    path("admin/", admin.site.urls),
 ]
 
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]

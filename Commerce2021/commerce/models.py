@@ -74,20 +74,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
-class Customer(models.Model):
-    id = models.IntegerField(primary_key=True)
-    account = models.IntegerField()
-    processing = models.CharField(max_length=45)
-    balance = models.CharField(max_length=45)
-    crdr = models.CharField(max_length=45)
-    amount = models.CharField(max_length=45)
-    description = models.CharField(max_length=45, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'customer'
-
-
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -130,3 +116,27 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
+
+
+class Transactions(models.Model):
+    account = models.ForeignKey('Users', models.DO_NOTHING, db_column='account')
+    processing = models.DateField()
+    balance = models.DecimalField(max_digits=10, decimal_places=0)
+    crdr = models.CharField(max_length=45)
+    amount = models.DecimalField(max_digits=10, decimal_places=0)
+    description = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'transactions'
+
+
+class Users(models.Model):
+    account_number = models.IntegerField(primary_key=True)
+    email = models.CharField(max_length=45, blank=True, null=True)
+    first_name = models.CharField(max_length=45, blank=True, null=True)
+    last_name = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'users'
