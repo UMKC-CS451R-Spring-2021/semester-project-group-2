@@ -1,0 +1,55 @@
+
+{% extends "navbar.html" %}
+
+{% block content %}
+
+<div class="container">
+	<div class="d-flex justify-content-center">
+		<div class="card dash">
+			<div class="card-header">
+				<h3 style="text-align: center;">Transaction History</h3>
+			</div>
+			<div class="card-body">
+				<table id="example" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>06/01/20</td>
+                            <td>(balance start)</td>
+                            <td>$0.00</td>
+                            <td>$5,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>06/03/20</td>
+                            <td>Starbucks</td>
+                            <td>$2.00</td>
+                            <td>4,998.00</td>
+                        </tr>
+                        <tr>
+                            <td>06/03/20</td>
+                            <td>Payroll</td>
+                            <td>$800.00</td>
+                            <td>$5,798.00</td>
+                        </tr>
+                        <tr>
+                            <td>06/03/20</td>
+                            <td>Chipotle</td>
+                            <td>$8.00</td>
+                            <td>$5,790.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align: center;">This has all been manually entered sample data</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
