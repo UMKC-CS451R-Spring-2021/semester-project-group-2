@@ -1,0 +1,13 @@
+{% extends "commerce/layout.html" %}
+{% block title %}
+Transactions
+{% endblock %}
+{% block content %}
+
+{% for customer in query_results %}
+
+{{customer.account}}, {{customer.processing}}, {{customer.balance}}, {{customer.crdr}}, {{customer.amount}}, {{customer.description}}<br>
+
+{% endfor %}
+
+{% endblock %}
