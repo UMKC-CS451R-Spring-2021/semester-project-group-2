@@ -1,25 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 html,body{
-/* I love this background image but is not practical for this project
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-*/
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
-font-family: 'Poppins', sans-serif;
+font-family: 'Open+Sans';
+}
+
+h3,.navbar {
+font-family: 'Poppins';
+}
+
+.navbar {
+height: 50px;
 }
 
 .btn-outline-register{
 background-color:#007AA3;
 color: black;
-
 }
 
 .btn-outline-login{
 background-color:#FFB300;
 color: black;
+}
 
+.btn-outline-logout{
+background-color:#E30000;
+color: black;
+}
+
+.dropdown{
+padding: 20px;
 }
 
 .container{
@@ -36,8 +49,24 @@ width: 400px;
 background-color:#D8D8D8;
 }
 
+.card.register{
+height: 450px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color:#D8D8D8;
+}
+
+.card.dash{
+height: 500px;
+margin-top: auto;
+margin-bottom: auto;
+width: 75%;
+background-color:#D8D8D8;
+}
+
 .card-header h3{
-color: black;
+color: #006747;
 }
 
 .input-group-prepend span{
