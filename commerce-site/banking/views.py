@@ -19,6 +19,7 @@ def hello_there(request, name):
         }
     )
 
+<<<<<<< Updated upstream
 
 @login_required
 def transactions(request):
@@ -26,6 +27,8 @@ def transactions(request):
     return render(request, 'commerce/transactions.html', {'query_results': query_results})
 
 
+=======
+>>>>>>> Stashed changes
 ########
 
 def homepage(request):
@@ -33,6 +36,7 @@ def homepage(request):
     return render(request, 'homepage.html')
 
 
+@login_required
 def dashboard(request):
     messages.info(request, "Logged in successfully")
     query_results = Transactions.objects.all()  # Collect all records from table

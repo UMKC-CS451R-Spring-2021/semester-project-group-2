@@ -31,6 +31,11 @@
                             <th>Description</th>
                             <th>Amount</th>
                             <th>Balance</th>
+                            {% for customer in query_results %}
+
+                            {{customer.account}}, {{customer.processing}}, {{customer.balance}}, {{customer.crdr}}, {{customer.amount}}, {{customer.description}}
+
+                            {% endfor %}
                         </tr>
                     </thead>
                     <tbody>

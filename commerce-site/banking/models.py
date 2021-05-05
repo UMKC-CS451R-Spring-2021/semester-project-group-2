@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.db.models import FloatField, CharField
 
 
 class AuthGroup(models.Model):
@@ -119,12 +120,13 @@ class DjangoSession(models.Model):
 
 
 class Transactions(models.Model):
-    account = models.ForeignKey('Users', models.DO_NOTHING, db_column='account')
-    processing = models.DateField()
-    balance = models.DecimalField(max_digits=10, decimal_places=0)
-    crdr = models.CharField(max_length=45)
-    amount = models.DecimalField(max_digits=10, decimal_places=0)
-    description = models.CharField(max_length=45, blank=True, null=True)
+    id = models.IntegerField(primary_key=True, null=False)
+    account_id = models.IntegerField()
+    balance = models.FloatField()
+    transaction_type = CharField(max_length=10)
+    amount = FloatField()
+    descr = CharField(max_length=50)
+    location = CharField(max_length=50)
 
     class Meta:
         managed = False
@@ -140,3 +142,27 @@ class Users(models.Model):
     class Meta:
         managed = False
         db_table = 'users'
+
+
+class notifications(models.Model):
+    notification_id    = models.IntegerField(null=False)
+    transaction_id = models.IntegerField()
+    account_id = models.IntegerField()
+    processing_date = models.DateTimeField()
+    balance    = models.FloatField()
+    transaction_type = models.CharField(max_length=50)
+    amount = models.FloatField()
+    descr = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    rule = models.IntegerField()
+
+
+class notification_rules(models.Model):
+    rule_id = models.IntegerField(null=False)
+    rule_type = models.IntegerField(null=False)
+    set_rule = models.BooleanField()
+    balance = FloatField()
+    location = CharField(max_length=50)
+    amount = FloatField()
+    descr = models.CharField(max_length=50)
+    message = models.CharField(max_length=100)
