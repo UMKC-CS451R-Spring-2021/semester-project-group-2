@@ -2,74 +2,73 @@ create database commerce;
 use commerce;
 
 CREATE TABLE commerce_user(
-id INT NOT NULL,
-email VARCHAR(50),
-f_name VARCHAR(50),
-l_name VARCHAR(50),
+id	INT NOT NULL,
+email	VARCHAR(50),
+f_name	VARCHAR(50),
+l_name	VARCHAR(50),
 
 PRIMARY KEY(id)
 );
 
 CREATE TABLE login(
-login_id INT NOT NULL auto_increment,
-login_password VARCHAR(50),
-username VARCHAR(50),
-user_id INT NOT NULL,
+login_id	INT NOT NULL auto_increment,
+login_password	VARCHAR(50),
+username	VARCHAR(50),
+user_id	INT NOT NULL,
 
 PRIMARY KEY(login_id),
-FOREIGN KEY(user_id) REFERENCES user(id)
+FOREIGN KEY(user_id) REFERENCES commerce_user(id)
 );
 
 CREATE TABLE user_account(
-account_id INT NOT NULL,
-balance FLOAT,
-user_id INT NOT NULL,
+account_id	INT NOT NULL,
+balance	FLOAT,
+user_id	INT NOT NULL,
 
 PRIMARY KEY(account_id),
-FOREIGN KEY(user_id) REFERENCES user(id)
+FOREIGN KEY(user_id) REFERENCES commerce_user(id)
 );
 
 CREATE TABLE transactions(
-transaction_id INT NOT NULL auto_increment,
-account_id INT,
-processing_date DATE,
-balance FLOAT,
-transaction_type VARCHAR(10),
-amount FLOAT,
-descr VARCHAR(50),
-location VARCHAR(50),
+transaction_id	INT NOT NULL auto_increment,
+account_id	INT,
+processing_date	DATE,
+balance	FLOAT,
+transaction_type	VARCHAR(10),
+amount	FLOAT,
+descr	VARCHAR(50),
+location	VARCHAR(50),
 
 PRIMARY KEY(transaction_id),
-FOREIGN KEY(account_id) REFERENCES account(account_id)
+FOREIGN KEY(account_id) REFERENCES user_account(account_id)
 );
 
 CREATE TABLE notification_rules(
-rule_id INT NOT NULL auto_increment,
-rule_type INT NOT NULL,
-set_rule BOOL,
-balance FLOAT DEFAULT NULL,
-location VARCHAR(50) DEFAULT NULL,
-amount FLOAT DEFAULT NULL,
+rule_id	INT NOT NULL auto_increment,
+rule_type	INT,
+set_rule	BOOL,
+balance	FLOAT DEFAULT NULL,
+location	VARCHAR(50) DEFAULT NULL,
+amount	FLOAT DEFAULT NULL,
 descr VARCHAR(50),
-message VARCHAR(100) DEFAULT NULL,
+message	VARCHAR(100) DEFAULT NULL,
 
 PRIMARY KEY(rule_id)
 );
 
 CREATE TABLE notifications(
-notification_id INT NOT NULL auto_increment,
-transaction_id INT,
-account_id INT,
-processing_date DATE,
-balance FLOAT,
-transaction_type VARCHAR(10),
-amount FLOAT,
-descr VARCHAR(50),
-location VARCHAR(50),
-rule INT,
+notification_id	INT NOT NULL auto_increment,
+transaction_id	INT,
+account_id	INT,
+processing_date	DATE,
+balance	FLOAT,
+transaction_type	VARCHAR(10),
+amount	FLOAT,
+descr	VARCHAR(50),
+location	VARCHAR(50),
+rule	INT,
 
-PRIMARY KEY(notification_id),
-FOREIGN KEY(rule) REFERENCES notification_rules(rule_type)
+PRIMARY KEY(notification_id)
 );
 
 -- load data for transactions table
@@ -105,8 +104,6 @@ INSERT INTO `notification_rules`
 (rule_type, set_rule, descr)
 VALUES
 (4, True, 'Payroll');
-
-
 
 
 
