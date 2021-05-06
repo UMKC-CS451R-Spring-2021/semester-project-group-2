@@ -4,6 +4,19 @@ DELIMITER $$
 
 CREATE PROCEDURE BalanceRule(IN t_id INT)
 BEGIN
+
+DECLARE rule_on BOOL;
+    DECLARE current_amount FLOAT;
+    DECLARE amount_limit FLOAT;
+    DECLARE i_account_id INT;
+    DECLARE i_processing_date DATE;
+	DECLARE i_balance FLOAT;
+    DECLARE i_transaction_type VARCHAR(10);
+    DECLARE i_amount FLOAT;
+    DECLARE i_descr VARCHAR(50);
+	DECLARE i_location VARCHAR(50);
+    DECLARE i_rule INT;
+
 -- low balance rule is type 1
 	SELECT set_rule
     INTO rule_on
@@ -54,6 +67,18 @@ DELIMITER $$
 
 CREATE PROCEDURE AmountRule(IN t_id INT)
 BEGIN
+	DECLARE rule_on BOOL;
+    DECLARE current_amount FLOAT;
+    DECLARE amount_limit FLOAT;
+    DECLARE i_account_id INT;
+    DECLARE i_processing_date DATE;
+	DECLARE i_balance FLOAT;
+    DECLARE i_transaction_type VARCHAR(10);
+    DECLARE i_amount FLOAT;
+    DECLARE i_descr VARCHAR(50);
+	DECLARE i_location VARCHAR(50);
+    DECLARE i_rule INT;
+
 -- amount rule is type 2
 	SELECT set_rule
     INTO rule_on
@@ -104,6 +129,21 @@ DELIMITER $$
 
 CREATE PROCEDURE LocationRule(IN t_id INT)
 BEGIN
+
+	DECLARE allowed_location VARCHAR(50);
+	DECLARE rule_on BOOL;
+    DECLARE current_amount FLOAT;
+    DECLARE amount_limit FLOAT;
+    DECLARE i_account_id INT;
+    DECLARE i_processing_date DATE;
+	DECLARE i_balance FLOAT;
+    DECLARE i_transaction_type VARCHAR(10);
+    DECLARE i_amount FLOAT;
+    DECLARE i_descr VARCHAR(50);
+	DECLARE i_location VARCHAR(50);
+    DECLARE i_rule INT;
+    DECLARE current_location VARCHAR(50);
+    
 -- location rule is type 3
 	SELECT set_rule
 	INTO rule_on
@@ -153,6 +193,20 @@ DELIMITER $$
 
 CREATE PROCEDURE DescriptionRule(IN t_id INT)
 BEGIN
+
+	DECLARE flagged_description VARCHAR(50);
+	DECLARE current_description VARCHAR(50);
+	DECLARE rule_on BOOL;
+    DECLARE current_amount FLOAT;
+    DECLARE amount_limit FLOAT;
+    DECLARE i_account_id INT;
+    DECLARE i_processing_date DATE;
+	DECLARE i_balance FLOAT;
+    DECLARE i_transaction_type VARCHAR(10);
+    DECLARE i_amount FLOAT;
+    DECLARE i_descr VARCHAR(50);
+	DECLARE i_location VARCHAR(50);
+    DECLARE i_rule INT;
 -- description rule is type 4
 SELECT set_rule
 	INTO rule_on
@@ -195,6 +249,3 @@ SELECT set_rule
 END $$
 
 DELIMITER ;
-
-        
-        
