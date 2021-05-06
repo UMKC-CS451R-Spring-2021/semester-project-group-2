@@ -4,12 +4,12 @@ DELIMITER $$
 
 CREATE TRIGGER CheckNotificationRules
 AFTER INSERT
-ON 'transactions' FOR EACH ROW
+ON `transactions` FOR EACH ROW
 BEGIN
-	CALL BalanceRule(NEW.id);
-    CALL LocationRule(NEW.id);
-    CALL DescriptionRule(NEW.id);
-    CALL AmountRule(NEW.id);
+	CALL BalanceRule(NEW.transaction_id);
+    CALL LocationRule(NEW.transaction_id);
+    CALL DescriptionRule(NEW.transaction_id);
+    CALL AmountRule(NEW.transaction_id);
 END $$
 
 DELIMITER ;
