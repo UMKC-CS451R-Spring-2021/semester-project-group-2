@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 from banking import views
+from . import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
