@@ -1,0 +1,68 @@
+
+{% extends "navbar.html" %}
+
+{% block content %}
+
+<div class="container-fluid" style="padding: 10px; background: linear-gradient(to right, #006747, #D8D8D8); text-align:center; box-shadow: 5px 5px 8px black;">
+
+    <h1>Account #{{user.username}} </h1>
+
+</div>
+<div class="container">
+	<div class="d-flex justify-content-center">
+		<div class="card dash">
+			<div class="card-header">
+                <div class="dropdown" style="float: right;">
+                    <button class="btn btn-secondary dropdown-toggle" style="box-shadow: 5px 5px 8px black;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sort By
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <form action="#" method="get">
+                             <input type="submit" class="btn" value="Normal" name="normal_btn">
+                            </form>
+                        <form action="#" method="get">
+                             <input type="submit" class="btn" value="Credit Only" name="mybtn">
+                            </form>
+                        <form action="#" method="get">
+                             <input type="submit" class="btn" value="Debit Only" name="mybtn_2">
+                            </form>
+                        <form action="#" method="get">
+                             <input type="submit" class="btn" value="Amount > 100" name="mybtn_3">
+                            </form>
+                    </div>
+                </div>
+			</div>
+            <div class="card-header">
+            <h3 style="text-align: center;">Transaction History</h3>
+            </div>
+			<div class="card-body">
+				<table id="example" class="table table-striped" style="width:100%">
+                    <tr>
+                        <th class="text-center">Date</th>
+                        <th class="text-right">Amount </th>
+                        <th class="text-center">Type</th>
+                        <th class="text-right">Balance</th>
+                        <th class="text-center">Description</th>
+
+                    </tr>
+
+                    {% for customer in query_results %}
+                        <tr>
+                        <td class="text-left">{{customer.processing_date}}</td>
+                        <td class="text-right">$ {{customer.amount}}0</td>
+                            {% if customer.transaction_type == "DR" %}
+                                <td class="text-center">Debit</td>
+                            {% elif customer.transaction_type == "CR" %}
+                                <td class="text-center">Credit</td>
+                            {% endif %}
+                        <td class="text-right">$ {{customer.balance}}</td>
+                        <td class="text-center">{{customer.descr}}</td>
+                    </tr>
+                             {% endfor %}
+                </table>
+            </div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
