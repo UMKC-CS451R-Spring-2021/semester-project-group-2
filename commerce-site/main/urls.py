@@ -16,9 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
+from banking import views
+from . import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('banking/', include('banking.urls')),
-    path('', RedirectView.as_view(url='banking/homepage')),
+    path('homepage/', include('django.contrib.auth.urls')),
+    path('', RedirectView.as_view(url='homepage/login')),
+    path('about_us/', views.about_us, name='about_us'),
+    path('contact/', views.contact, name='contact'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('homepage/login/', views.homepage, name='homepage'),
+    path('notifications/', views.notifications, name='notifications'),
+
 ]

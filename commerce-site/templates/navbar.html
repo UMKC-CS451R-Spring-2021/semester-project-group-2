@@ -10,7 +10,6 @@
     <title>Commerce Bank</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
-
 </head>
 
 <!--Navbar Starts Here-->
@@ -22,7 +21,11 @@
   <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
   <script src="{% static 'js/popper.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <a class="navbar-brand" style="color:#006747;" href="{% url 'homepage' %}">Commerce Bank</a>
+
+    <!--Logo with link attached-->
+    <a class="image" href="{% url 'login' %}">
+        <img src="{% static "logo.png" %}" alt="commerce_logo" />
+    </a>
   
   <!--When collapsed enough a button will appear to allow option of navbar-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,17 +36,18 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
           <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
           <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
       </li>
       </ul>
 
       <!--This is taking logic from login_request in views to know if a logout button is required-->
       {% if present_logout == True %}
-      <a class="btn btn-outline-logout ml-2 mr-2" href="{% url 'logout' %}">Logout</a>
+      <a class="btn ml-2 mr-2" style="box-shadow: 5px 5px 8px black; background-color: #FFB300;" href="{% url 'notifications' %}">notifications</a>
+      <a class="btn btn-outline-logout ml-2 mr-2" style="box-shadow: 5px 5px 8px black;" href="{% url 'logout' %}">Logout</a>
       {% endif %}
 
   </div>

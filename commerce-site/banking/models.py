@@ -6,7 +6,9 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import send_mail
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
@@ -74,6 +76,25 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
+class BalanceNotif(models.Model):
+    account_id = models.IntegerField(primary_key=True)
+    is_true = models.CharField(max_length=1)
+    amount = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'balance_notif'
+
+
+class DepositNotif(models.Model):
+    account_id = models.IntegerField(primary_key=True)
+    is_true = models.CharField(max_length=1)
+
+    class Meta:
+        managed = False
+        db_table = 'deposit_notif'
+
+
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -119,24 +140,66 @@ class DjangoSession(models.Model):
 
 
 class Transactions(models.Model):
-    account = models.ForeignKey('Users', models.DO_NOTHING, db_column='account')
-    processing = models.DateField()
-    balance = models.DecimalField(max_digits=10, decimal_places=0)
-    crdr = models.CharField(max_length=45)
-    amount = models.DecimalField(max_digits=10, decimal_places=0)
-    description = models.CharField(max_length=45, blank=True, null=True)
+    transaction_id = models.AutoField(primary_key=True)
+    account_id = models.IntegerField(blank=True, null=True)
+    processing_date = models.DateField(blank=True, null=True)
+    balance = models.FloatField(blank=True, null=True)
+    transaction_type = models.CharField(max_length=10, blank=True, null=True)
+    amount = models.FloatField(blank=True, null=True)
+    descr = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'transactions'
 
 
-class Users(models.Model):
-    account_number = models.IntegerField(primary_key=True)
-    email = models.CharField(max_length=45, blank=True, null=True)
-    first_name = models.CharField(max_length=45, blank=True, null=True)
-    last_name = models.CharField(max_length=45, blank=True, null=True)
+class WithdrawalNotif(models.Model):
+    account_id = models.IntegerField(primary_key=True)
+    is_true = models.CharField(max_length=1)
+    amount = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'users'
+        db_table = 'withdrawal_notif'
+
+@receiver(post_save, sender=Transactions, dispatch_uid="check_deposit")
+def check_deposit(sender, instance, **kwargs):
+
+    if instance.transaction_type=="CR":
+        query_results = DepositNotif.objects.get(account_id = instance.account_id)
+        if query_results.is_true == "1":
+            print("transaction was a credit")
+            send_mail(
+                'Credit Update - Commerce Bank',
+                'This email is to notify that a Credit has been added to your account.',
+                'coykwan@gmail.com',
+                ['daylanq10@gmail.com'],
+                fail_silently=False,
+            )
+
+    if instance.transaction_type=="DR":
+        query_results = WithdrawalNotif.objects.get(account_id = instance.account_id)
+        if query_results.is_true == "1":
+            if instance.amount >= query_results.amount:
+                print("transaction was a large withdrawal")
+                send_mail(
+                    'Withdraw Update - Commerce Bank',
+                    'This email is to notify that an amount over your desired amount has been withdrawn from your account.',
+                    'coykwan@gmail.com',
+                    ['daylanq10@gmail.com'],
+                    fail_silently=False,
+                )
+
+    query_result = BalanceNotif.objects.get(account_id = instance.account_id)
+    print(type(instance.balance))
+    print(type(query_result.amount))
+    if instance.balance < query_result.amount:
+        print("Your account has dropped below your set value")
+        send_mail(
+            'Balance Update - Commerce Bank',
+            'This email is to notify that you that your account has dropped below your desired amount.',
+            'coykwan@gmail.com',
+            ['daylanq10@gmail.com'],
+            fail_silently=False,
+        )
+

@@ -1,6 +1,7 @@
 {% extends "navbar.html" %}
 
 {% block content %}
+
 <div class="container-fluid">
 	<div class="row align-items-start">
 
@@ -15,35 +16,32 @@
 					<h3 style="text-align: center;">Sign In</h3>
 				</div>
 				<div class="card-body">
-					<form>
+					<div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"></i></span>
-							</div>
-							<input type="text" class="form-control" placeholder="Username">
+								<div class="form-group">
+
+                                  <form method="post">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <button type="submit" class="login_btn">Log In</button>
+                                  </form>
 
 						</div>
-						<div class="input-group form-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text"></span></i></span>
-							</div>
-							<input type="password" class="form-control" placeholder="Password">
-						</div>
+								<!--
 						<div class="row align-items-center remember">
 							<input type="checkbox">Remember Me
 						</div>
-						<div class="form-group">
-							<a class="btn btn-outline-login float-right" href="{% url 'login' %}">Login</a>
+						-->
+
 						</div>
-					</form>
+                        </div>
 				</div>
-				<!--These are optional things I added. We will see if we get there-->
+
+				<!--These are optional things I added. We will see if we get there -->
 				<div class="card-footer">
 					<div class="d-flex justify-content-center links">
-						Don't have an account?
-					</div>
-					<div class="d-flex justify-content-center links">
-						<a href="#">Forgot your password?</a>
+						<a href="{% url 'password_reset' %}">Forgot your password?</a>
 					</div>
 				</div>
 			</div>
